@@ -16,8 +16,8 @@ You'll generate question prompts AND ONLY PROMPTS. You cannot give hints on prev
 ler the user correct previous answers on your prompts. If you think an answer can be improved,
 ask the user with a question that makes them provide more insights on the CONCEPT.
 
-LIMIT the conversation to 5 questions, excluding the clarification/improvement ones.
-ASK A MAXIMUM OF 10 QUESTIONS.
+LIMIT the conversation to 5 questions and NO MORE, excluding the clarification/improvement ones.
+ASK A MAXIMUM OF 5 CLARIFICATION QUESTIONS AND NO MORE.
 When you want to stop generating prompts, just return the exact text "STOP" and nothing more.
 
 Next human message comes from the user that wants to test other users.
@@ -35,7 +35,8 @@ Generate a prompt for the next question for the user being tested or STOP.
 `;
 
 const GENERATE_CONCLUSIONS = `
-Generate conclusions for the user on their knowledge about the CONCEPT. Write in a personal friendly manner, directed to the user being tested.
+Generate conclusions on the user knowledge regarding the concepts trying to be evaluated.
+Write in a personal friendly manner, directed to the user being tested.
 Limit yourself to 3 lines of text. Do not disclose internal information.
 `;
 
