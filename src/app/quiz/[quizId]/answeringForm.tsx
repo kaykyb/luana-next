@@ -8,18 +8,22 @@ import {
 import { EvaluateePrompt, EvaluateeQuizSession } from "@/lib/api/types";
 
 export const AnsweringForm = ({ quizId }: { quizId: string }) => {
+  const [isStarting, setIsStarting] = useState(false);
+
   const [quizSessionId, setQuizSessionId] =
     useState<EvaluateeQuizSession | null>(null);
   const [prompts, setPrompts] = useState<EvaluateePrompt[]>([]);
   const [conclusion, setConclusion] = useState<string | null>(null);
 
   const handleStart = async () => {
+    setIsStarting(true);
     const response = await startEvaluateeQuizSession(quizId);
 
     if (response.ok) {
       setQuizSessionId(response.data.session);
       setPrompts([...prompts, response.data.firstPrompt]);
     }
+    setIsStarting(false);
   };
 
   const handleNextPrompt = async () => {
@@ -39,7 +43,8 @@ export const AnsweringForm = ({ quizId }: { quizId: string }) => {
       <div>
         <button
           onClick={handleStart}
-          className="px-6 py-2 bg-black text-white rounded-full font-bold"
+          disabled={isStarting}
+          className="px-6 py-2 bg-black text-white rounded-full font-bold disabled:opacity-40"
         >
           Start quiz
         </button>
